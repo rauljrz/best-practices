@@ -11,18 +11,18 @@ Tiene como objetivo ayudar y guiar a los mismos a escribir código limpio y de a
   - [Objetivos](#objetivos)
   - [Tabla de Contenidos](#tabla-de-contenidos)
     - [Introducción](#introducción)
-  - [¿Por qué seguir buenas prácticas?](#por-qué-seguir-buenas-prácticas)
-- [Clean Code](#clean-code)
-  - [Naming](#naming)
-  - [Variables](#variables)
-  - [Métodos y Funciones](#métodos-y-funciones)
-  - [Condicionales](#condicionales)
-  - [Clases y Objetos](#clases-y-objetos)
-- [Principios de Diseño de Software](#principios-de-diseño-de-software)
-  - [SOLID](#solid)
-  - [Principio DRY](#principio-dry)
-  - [Principio Tell don't ask](#principio-tell-dont-ask)
-- [Testing](#testing)
+    - [¿Por qué seguir buenas prácticas?](#por-qué-seguir-buenas-prácticas)
+  - [Clean Code](#clean-code)
+    - [a) Naming](#a-naming)
+    - [b) Variables](#b-variables)
+    - [c) Métodos y Funciones](#c-métodos-y-funciones)
+    - [d) Condicionales](#d-condicionales)
+    - [e) Clases y Objetos](#e-clases-y-objetos)
+  - [Principios de Diseño de Software](#principios-de-diseño-de-software)
+    - [a) SOLID](#a-solid)
+    - [b) Principio DRY](#b-principio-dry)
+    - [c) Principio Tell don't ask](#c-principio-tell-dont-ask)
+  - [Testing](#testing)
 
 ### <a name="intro">Introducción</a>
 
@@ -34,17 +34,17 @@ Hay que tener en cuenta que todos de los ejemplos en este artículo funcionan en
 
 Inspirado en [clean-code-dotnet](https://github.com/thangchung/clean-code-dotnet/blob/master/README.md).
 
-## <a name="best-practices">¿Por qué seguir buenas prácticas?</a>
+### <a name="best-practices">¿Por qué seguir buenas prácticas?</a>
 
 Como desarrolladores, a veces nos sentimos tentados a escribir código de cierta manera que sea conveniente para terminar rápidamente sin tener en cuenta las buenas prácticas. Posteriormente esto dificulta las revisiones y las pruebas de código.
 Podríamos decir que estamos _codificando_ y, al hacerlo, hacemos más difícil para otros _decodificar_ nuestro trabajo. Sin embargo, nuestro objetivo como desarrollador debe ser que nuestro código sea reutilizable, legible y mantenible. Y eso algunas veces requiere un esfuerzo extra.
 
-# Clean Code
+## Clean Code
 
-## Naming
+### a) Naming
 
 <details>
-  <summary><b>Evitar usar nombres complicados</b></summary>
+  <summary><b>1. Evitar usar nombres complicados</b></summary>
 Un buen nombre permite que los desarrolladores entiendan fácilmente el código. El nombre debe reflejar lo que hace y dar contexto.
 
 **Mal:**
@@ -64,7 +64,7 @@ $currentDate = $moment->format('y-m-d');
 </details>
 
 <details>
-  <summary><b>Usar notación Camel Case</b></summary>
+  <summary><b>2. Usar notación Camel Case</b></summary>
 
 Usar la [notación CamelCase](https://en.wikipedia.org/wiki/Camel_case) para variables, clases, métodos y funciones.
 
@@ -94,10 +94,10 @@ public function calculateProductPrice(int $productId, int $quantity)
 
 </details>
 
-## Variables
+### b) Variables
 
 <details>
-  <summary><b>Evitar valores mágicos</b></summary>
+  <summary><b>1. Evitar valores mágicos</b></summary>
 
 Valores mágicos se refiere a los valores constantes que se especifican directamente dentro del código. Con frecuencia, dichos valores terminan duplicados dentro del sistema y se convierten en una fuente común de errores cuando se realizan cambios.
 
@@ -140,7 +140,7 @@ De esta manera solo tenemos que cambiar en un único lugar centralizado.`
 </details>
 
 <details>
-  <summary><b>Usar variables explicativas</b></summary>
+  <summary><b>2. Usar variables explicativas</b></summary>
 
 No fuerce al lector del código a traducir lo que significa la variable. **Explícito es mejor que implícito**.
 
@@ -181,7 +181,7 @@ saveCityZipCode($matches['street'], $matches['zipCode']);
 </details>
 
 <details>
-  <summary><b>Evitar anidación profunda.</b></summary>
+  <summary><b>3. Evitar anidación profunda.</b></summary>
 
 Debemos minimizar al máximo los niveles de indentación. Muchas declaraciones if-else anidadas pueden hacer tu código difícil de seguir.
 
@@ -233,7 +233,7 @@ function isShopOpen(string $day): bool
 </details>
 
 <details>
-  <summary><b>Evitar utilizar sentencia else.</b></summary>
+  <summary><b>4. Evitar utilizar sentencia else.</b></summary>
 
 La sentencia `else` puede dificultar la lectura del código si la sentencia `if` contiene demasiado código.
 
@@ -265,7 +265,7 @@ if (!$product->hasStock()) {
 </details>
 
 <details>
-  <summary><b>No agregar contexto innecesario</b></summary>
+  <summary><b>5. No agregar contexto innecesario</b></summary>
 
 Si el nombre de tu clase/objeto te dice algo, no lo repitas en el nombre del atributo.
 
@@ -299,12 +299,12 @@ class Product
 
 </details>
 
-## <a name="mtodos-y-funciones">Métodos y Funciones</a>
+### c) Métodos y Funciones
 
 Los siguiente consejos aplican tanto a métodos como a funciones.
 
 <details>
-  <summary><b>Declaración de tipos en parámetros y retornos</b></summary>
+  <summary><b>1. Declaración de tipos en parámetros y retornos</b></summary>
   
   Desde PHP 7 podemos utilizar la declaración de tipos para los argumentos de entrada y salida de nuestras funciones y métodos.
 
@@ -331,7 +331,7 @@ function sum(int $val1, int $val2): int
 </details>
 
 <details>
-  <summary><b>Argumentos de la función (idealmente no más de 2)</b></summary>
+  <summary><b>2. Argumentos de la función (idealmente no más de 2)</b></summary>
 
 El número ideal de argumentos es cero, después uno (monádico) y después dos (diádico). Siempre debes evitar desarrollar funciones o métodos con tres o más argumentos (poliádico). Más de dos argumentos significa que el método esta haciendo demasiadas cosas.
 Para los casos en donde se necesiten más de dos argumentos, es mejor utilizar un objeto como argumento.
@@ -378,7 +378,7 @@ createProduct($config);
 </details>
 
 <details>
-  <summary><b>Las funciones deben hacer una cosa</b></summary>
+  <summary><b>3. Las funciones deben hacer una cosa</b></summary>
 
 Cuando las funciones hacen más de una acción, se vuelven difíciles de razonar y probar. Cuando puedes aislar una función en una sola acción, ellas pueden ser refactorizadas con facilidad y el código será mucho más fácil de leer y reutilizar.
 
@@ -423,7 +423,7 @@ function isClientActive(int $client): bool
 </details>
 
 <details>
-  <summary><b>Tamaño reducido</b></summary>
+  <summary><b>4. Tamaño reducido</b></summary>
 
 La primera regla de las funciones es que deben ser de tamaño reducido. La segunda regla es que deben ser todavía más reducidos.
 La experiencia cuenta que las funciones con más de 20 líneas de código aproximadamente, esconden más de una acción.
@@ -433,7 +433,7 @@ La experiencia cuenta que las funciones con más de 20 líneas de código aproxi
 </details>
 
 <details>
-  <summary><b>Los nombres de las funciones y métodos deben indicar lo que hacen</b></summary>
+  <summary><b>5. Los nombres de las funciones y métodos deben indicar lo que hacen</b></summary>
 
 **Mal:**
 
@@ -476,7 +476,7 @@ $message->send();
 </details>
 
 <details>
-  <summary><b>Las funciones deben tener sólo un nivel de abstracción</b></summary>
+  <summary><b>6. Las funciones deben tener sólo un nivel de abstracción</b></summary>
   
 Cuando existe más de un nivel de abstracción usualmente es porque la función está haciendo demasiado. Dividirlas en funciones más pequeñas lleva a la reutilización de las mismas y facilita las pruebas.
 
@@ -615,7 +615,7 @@ class BetterJSAlternative
 </details>
 
 <details>
-  <summary><b>No usar flags como parámetros de funciones</b></summary>
+  <summary><b>7. No usar flags como parámetros de funciones</b></summary>
   
 Las banderas le dicen al usuario que la función hace más de una cosa. Se debe dividir las funciones si siguen diferentes caminos basados en un valor booleano.
 
@@ -651,7 +651,7 @@ function createTempFile(string $name): void
 </details>
 
 <details>
-  <summary><b>Evitar efectos secundarios</b></summary>
+  <summary><b>8. Evitar efectos secundarios</b></summary>
 
 El punto principal es evitar compartir estados entre objetos sin alguna estructura, usar tipos de datos mutables que puedan ser escritos por cualquiera, y no centralizar donde el efectos ocurren.
 
@@ -688,7 +688,7 @@ function sendEmail($email)
 </details>
 
 <details>
-  <summary><b>Evitar retornar null</b></summary>
+  <summary><b>9. Evitar retornar null</b></summary>
 
 Al retornar `null` podríamos estar obligando al cliente de la función o método a realizar una validación adicional.
 Basta con que falte la comprobación de `null` para que la aplicación pierda el control.
@@ -733,10 +733,10 @@ foreach ($items as $item) {
 
 </details>
 
-## Condicionales
+### d) Condicionales
 
 <details>
-  <summary><b>Evitar condicionales</b></summary>
+  <summary><b>1. Evitar condicionales</b></summary>
 
 Al tener declaraciones `if` dentro de nuestras funciones, estamos diciendo que nuestra función puede hacer más de una cosa.
 
@@ -799,7 +799,7 @@ class Cessna implements Airplane
 </details>
 
 <details>
-  <summary><b>Evitar condicionales negativos</b></summary>
+  <summary><b>2. Evitar condicionales negativos</b></summary>
 
 **Mal:**
 
@@ -824,7 +824,7 @@ if (havePromotions($product))
 </details>
 
 <details>
-  <summary><b>Evitar verificación de tipo</b></summary>
+  <summary><b>3. Evitar verificación de tipo</b></summary>
 
 Hacer verificaciones de tipos da una falsa "seguridad de tipado" además de afectar la legibilidad del código.
 
@@ -855,7 +855,7 @@ function travelToTexas(Traveler $vehicle): void
 </details>
 
 <details>
-  <summary><b>Evitar revisión de tipos primitivos</b></summary>
+  <summary><b>4. Evitar revisión de tipos primitivos</b></summary>
   
   El punto anterior también aplica a los tipos primitivos.
 
@@ -886,7 +886,7 @@ function combine(int $val1, int $val2): int
 </details>
 
 <details>
-  <summary><b>Encapsular condicionales</b></summary>
+  <summary><b>5. Encapsular condicionales</b></summary>
   
   Encapsula condiciones dentro de métodos o funciones brinda un unico punto de modificación, mayor cohesión y promueve la reutilización.
 
@@ -910,10 +910,10 @@ if ($payment->isPending()) {
 
 </details>
 
-## Clases y Objetos
+### e) Clases y Objetos
 
 <details>
-  <summary><b>Clases finales por defecto</b></summary>
+  <summary><b>1. Clases finales por defecto</b></summary>
   
   Al momento de pensar y crear una clase debemos partir de la premisa que son clases finales. De esta forma promovemos la idea de que deben funcionar como una unidad del sistema.
   Permitiendo mayor entendimiento, mantenimiento y reutilización de la clase.
@@ -943,7 +943,7 @@ final class Employee
 </details>
 
 <details>
-  <summary><b>Propiedades privadas por defecto</b></summary>
+  <summary><b>2. Propiedades privadas por defecto</b></summary>
 
 La visibilidad de las propiedades debe ser `private` por defecto. Ya que el objeto no debe revelar nada de si mismo,
 excepto lo que sea necesario para que otras partes del sistema interactúen con él.
@@ -970,7 +970,7 @@ final class Product
 </details>
 
 <details>
-  <summary><b>Constructor sobre setters públicos</b></summary>
+  <summary><b>3. Constructor sobre setters públicos</b></summary>
   
   Siempre debemos esconder los detalles de implementación de los objetos.
   Para eso, debemos construir los objetos por medio de su constructor y no por setters públicos.
@@ -1053,7 +1053,7 @@ $product = new Product('Foo', 1000.00);
 </details>
 
 <details>
-  <summary><b>Preferir la composición sobre la herencia</b></summary>
+  <summary><b>4. Preferir la composición sobre la herencia</b></summary>
 
 Composición sobre herencia es un principio de diseño que permite una mayor flexibilidad.
 Es más natural construir clases de dominio a partir de varios componentes
@@ -1131,7 +1131,7 @@ rompe con el acoplamiento estrecho que teníamos en la herencia.
 
 </details>
 
-# <a name="principios-de-diseo-de-software">Principios de Diseño de Software</a>
+## <a name="principios-de-diseo-de-software">Principios de Diseño de Software</a>
 
 <details>
   <summary><b>¿Qué es el Diseño de Software?</b></summary>
@@ -1145,7 +1145,7 @@ rompe con el acoplamiento estrecho que teníamos en la herencia.
   Algunos de ellos son:
 </details>
 
-## SOLID
+### a) SOLID
 
 <details>
   <summary><b>¿Qué es SOLID?</b></summary>
@@ -1153,9 +1153,9 @@ rompe con el acoplamiento estrecho que teníamos en la herencia.
   SOLID es un acrónimo donde cada letra representa un principio del diseño orientado a objetos.
   Los cinco principios están muy relacionados entre si y nos brindan distintas técnicas para crear código de alta calidad.
 
-- [S: Principio de responsabilidad única (SRP)](#single-responsibility-principle-srp)
-- [O: Principio abierto/cerrado (OCP)](#open-closed-principle-ocp)
-- [L: Principio de sustitución de Liskov (LSP)](#liskov-substitution-principle-lsp)
+- [S: Principio de responsabilidad única (SRP)](#principio-de-responsabilidad-única-srp)
+- [O: Principio abierto/cerrado (OCP)](#principio-abiertocerrado-ocp)
+- [L: Principio de sustitución de Liskov (LSP)](#principio-de-sustitución-de-liskov-lsp)
 - [I: Principio de la segregación de la interfaz (ISP)](#interface-segregation-principle-isp)
 - [D: Principio de la inversión de dependencias (DIP)](#dependency-inversion-principle-dip)
 
@@ -1504,7 +1504,7 @@ Otro ejemplo de este principio lo vimos en la sección de [Composición sobre He
 
 </details>
 
-## Principio DRY
+### b) Principio DRY
 
 <details>
   <summary><b>Principio DRY: Don’t Repeat Yourself</b></summary>
@@ -1593,7 +1593,7 @@ function showList(array $employees): void
 
 </details>
 
-## <a name="principio-tell-dont-ask">Principio Tell don't ask</a>
+### <a name="principio-tell-dont-ask">c) Principio Tell don't ask</a>
 
 <details>
   <summary><b>¿Qué es el principio Tell don't ask?</b></summary>
@@ -1633,6 +1633,6 @@ class Order
 
 </details>
 
-# Testing
+## Testing
 
-WIP
+
